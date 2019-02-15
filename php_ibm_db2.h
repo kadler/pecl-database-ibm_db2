@@ -128,7 +128,7 @@ extern zend_module_entry ibm_db2_module_entry;
 #define SQL_IS_INTEGER 0
 #define SQL_IS_UINTEGER	0 
 #define SQL_BEST_ROWID 0
-#define SQLLEN long
+#define SQLLEN SQLINTEGER
 #define SQLFLOAT double
 #define SQLUINTEGER SQLINTEGER
 #define SQLUSMALLINT SQLSMALLINT
