@@ -9,6 +9,7 @@ pipeline {
     OBJECT_MODE = '64'
     CC = 'gcc'
     CXX = 'g++'
+    LDFLAGS = '-Wl,-brtl' // configure requires this to be set, even though we default it on :(
   }
 
   stages {
