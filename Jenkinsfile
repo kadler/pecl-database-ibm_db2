@@ -22,7 +22,11 @@ pipeline {
     }
 
     stage('test') {
+      environment {
+        DATABASE = credentials('database-creds')
+      }
       steps {
+        sh label: 'setting up user', script:'sed "s|sample|*LOCAL|; s|db2inst1|$DATABASE_USR|; s|db2inst1|$DATABASE_PSW|; " tests/connection.inc'
         sh 'make test'
       }
     }
