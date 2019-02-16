@@ -25,10 +25,16 @@ pipeline {
       environment {
         DATABASE = credentials('database-creds')
         IBM_DB2_TEST_SKIP_CONNECT_FAILURE = 0 // don't skip tests if we can't connect
+        REPORT_EXIT_STATUS = 1
       }
       steps {
         sh label: 'setting up user', script:'perl -p -i -e "s|sample|*LOCAL|; s|db2inst1|$DATABASE_USR|; s|db2inst1|$DATABASE_PSW|; " tests/connection.inc'
-        sh 'make test'
+        sh 'make test TESTS="-s report.txt"'
+        post {
+          failure {
+            sh 'cat report.txt'
+          }
+        }
       }
     }
   }
