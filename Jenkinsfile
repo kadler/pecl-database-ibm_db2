@@ -31,10 +31,10 @@ pipeline {
       steps {
         sh label: 'setting up user', script:'perl -p -i -e "s|sample|*LOCAL|; s|db2inst1|$DATABASE_USR|; s|db2inst1|$DATABASE_PSW|; " tests/connection.inc'
         sh 'make test TESTS="-s report.txt"'
-        post {
-          failure {
-            sh 'cat report.txt'
-          }
+      }
+      post {
+        failure {
+          sh 'cat report.txt'
         }
       }
     }
